@@ -8,6 +8,26 @@ export default function Main() {
         public: false,
     });
 
+    // Per input di tipo text e textarea
+    function handleChange(e) {
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    }
+
+    // Per la checkbox (booleano)
+    function handleCheckboxChange(e) {
+        const { name, checked } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: checked,
+        }));
+    }
+
     return (
         <main>
             <h1>Crea un nuovo post</h1>
@@ -20,6 +40,7 @@ export default function Main() {
                         name="author"
                         type="text"
                         value={formData.author}
+                        onChange={handleChange}
                     />
                 </div>
 
@@ -30,6 +51,7 @@ export default function Main() {
                         name="title"
                         type="text"
                         value={formData.title}
+                        onChange={handleChange}
                     />
                 </div>
 
@@ -40,6 +62,7 @@ export default function Main() {
                         name="body"
                         rows="5"
                         value={formData.body}
+                        onChange={handleChange}
                     />
                 </div>
 
@@ -50,6 +73,7 @@ export default function Main() {
                             name="public"
                             type="checkbox"
                             checked={formData.public}
+                            onChange={handleCheckboxChange}
                         />
                         Public post
                     </label>
