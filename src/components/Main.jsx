@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function Main() {
     const [formData, setFormData] = useState({
@@ -8,23 +8,19 @@ export default function Main() {
         public: false,
     });
 
-    // Per input di tipo text e textarea
     function handleChange(e) {
         const { name, value } = e.target;
-
-        setFormData((prev) => ({
+        setFormData(prev => ({
             ...prev,
-            [name]: value,
+            [name]: value
         }));
     }
 
-    // Per la checkbox (booleano)
     function handleCheckboxChange(e) {
         const { name, checked } = e.target;
-
-        setFormData((prev) => ({
+        setFormData(prev => ({
             ...prev,
-            [name]: checked,
+            [name]: checked
         }));
     }
 
@@ -33,51 +29,45 @@ export default function Main() {
             <h1>Crea un nuovo post</h1>
 
             <form>
-                <div>
-                    <label htmlFor="author">Author</label>
+                <label>
+                    Author
                     <input
-                        id="author"
-                        name="author"
                         type="text"
+                        name="author"
                         value={formData.author}
                         onChange={handleChange}
                     />
-                </div>
+                </label>
 
-                <div>
-                    <label htmlFor="title">Title</label>
+                <label>
+                    Title
                     <input
-                        id="title"
-                        name="title"
                         type="text"
+                        name="title"
                         value={formData.title}
                         onChange={handleChange}
                     />
-                </div>
+                </label>
 
-                <div>
-                    <label htmlFor="body">Body</label>
+                <label>
+                    Body
                     <textarea
-                        id="body"
                         name="body"
                         rows="5"
                         value={formData.body}
                         onChange={handleChange}
-                    />
-                </div>
+                    ></textarea>
+                </label>
 
-                <div>
-                    <label htmlFor="public">
-                        <input
-                            id="public"
-                            name="public"
-                            type="checkbox"
-                            checked={formData.public}
-                            onChange={handleCheckboxChange}
-                        />
-                        Public post
-                    </label>
-                </div>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="public"
+                        checked={formData.public}
+                        onChange={handleCheckboxChange}
+                    />
+                    Public post
+                </label>
 
                 <button type="submit">Invia</button>
             </form>
