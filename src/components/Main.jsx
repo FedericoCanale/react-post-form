@@ -1,4 +1,7 @@
 import { useState } from "react";
+import axios from "axios";
+
+const API_URL = "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts";
 
 export default function Main() {
     const [formData, setFormData] = useState({
@@ -10,25 +13,30 @@ export default function Main() {
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        setFormData(prev => ({ ...prev, [name]: value }));
     }
 
     function handleCheckboxChange(e) {
         const { name, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: checked
-        }));
+        setFormData(prev => ({ ...prev, [name]: checked }));
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        try {
+            const res = await axios.post(API_URL, formData);
+            console.log("POST success:", res.data);
+        } catch (err) {
+            console.error("POST error:", err);
+        }
     }
 
     return (
         <main>
             <h1>Crea un nuovo post</h1>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>
                     Author
                     <input
